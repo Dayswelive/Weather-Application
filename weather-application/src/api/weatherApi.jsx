@@ -1,4 +1,4 @@
-const API_KEY = "25c01fde9cba2a86991082780f31863d";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 export const getWeatherData = async (city) => {
   try {
     const response = await fetch(
