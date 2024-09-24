@@ -209,6 +209,9 @@ body {
 }
 
 .head-right h6 {
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-size: 14px;
   padding: 15px 18px;
   border-radius: 30px;
@@ -222,6 +225,11 @@ body {
 
 .cel {
   cursor: pointer;
+  background-color: #585676;
+  color: white;
+}
+
+.head-right h6.active {
   background-color: white;
   color: black;
 }

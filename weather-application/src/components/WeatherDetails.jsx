@@ -28,12 +28,14 @@ const WeatherDetails = ({ weatherData, unit }) => {
   const weatherCondition = weatherData.list[0].weather[0].main;
   const weatherIcon = weatherIcons[weatherCondition] || Clear;
 
+  console.log(unit);
   return (
     <>
       <div className="img1-left">
         <img className="bgImg" src={background} alt="back" />
         <img className="mainImg" src={weatherIcon} alt="weather-icon" />
       </div>
+
       <div className="temp-left">
         <h2 className="cel-left">
           <span>{unit === "C" ? tempC : ""} </span> ৹C

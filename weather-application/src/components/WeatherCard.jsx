@@ -1,35 +1,3 @@
-// import React from "react";
-
-// const WeatherCard = ({ dayData, unit, index }) => {
-//   const getTemperature = (temp) => {
-//     return unit === "C"
-//       ? (temp - 273.15).toFixed(1) + "৹C"
-//       : (((temp - 273.15) * 9) / 5 + 32).toFixed(1) + "°F";
-//   };
-
-//   console.log(dayData.weather);
-//   return (
-//     <div className={`card${index + 1} card`}>
-//       <h6 className="day">
-//         {new Date(dayData.dt * 1000).toLocaleDateString("en", {
-//           weekday: "short",
-//         })}
-//       </h6>
-//       <img
-//         className="mainImg2"
-//         src={`/${dayData.weather[0].main}.png`}
-//         alt={dayData.weather[0].description}
-//       />
-//       <div className="foot-card">
-//         <p className="maxTemp">{getTemperature(dayData.main.temp_max)}</p>
-//         <p className="minTemp">{getTemperature(dayData.main.temp_min)}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default WeatherCard;
-
 import React from "react";
 import Clear from "../assets/images/Clear.png";
 import HeavyCloud from "../assets/images/HeavyCloud.png";
