@@ -536,6 +536,50 @@ body {
   font-size: 1.2em;
 }
 
+.date-picker-container {
+  margin: 20px 0;
+}
+
+.date-picker {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Modal Styling */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.close-modal-button {
+  background-color: #ff5c5c;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.close-modal-button:hover {
+  background-color: #ff1c1c;
+}
+
 /* ============== MEDIA QUERIES =================== */
 
 @media only screen and (max-width: 1176px) {

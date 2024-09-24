@@ -7,6 +7,10 @@ import { getWeatherData } from "./api/weatherApi";
 import "./stylesheets/style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
 const App = () => {
   // state management
@@ -14,6 +18,9 @@ const App = () => {
   const [city, setCity] = useState("Pantnagar");
   const [unit, setUnit] = useState("C");
   const [error, setError] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDayData, setSelectedDayData] = useState(null);
 
   // useeffect to fetch the weather details
   useEffect(() => {
@@ -41,6 +48,31 @@ const App = () => {
   // Toggle between celcius and farenhite
   const toggleUnit = (unitType) => {
     setUnit(unitType);
+  };
+
+  const convertTemperature = (kelvinTemp) => {
+    return unit === "C"
+      ? (kelvinTemp - 273.15).toFixed(2)
+      : ((kelvinTemp - 273.15) * 9) / 5 + 32;
+  };
+  // Function to filter weather data based on selected date
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    const filteredDayData = weatherData.list.find((item) => {
+      const itemDate = new Date(item.dt * 1000);
+      return itemDate.toDateString() === date.toDateString();
+    });
+    if (filteredDayData) {
+      setSelectedDayData(filteredDayData);
+      setIsModalOpen(true);
+    } else {
+      toast.error("No weather data available for this date.");
+    }
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -87,6 +119,15 @@ const App = () => {
               </>
             )}
           </div>
+          {/* Date Picker for filtering by date */}
+          <div className="date-picker-container">
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              placeholderText="Select a date"
+              className="date-picker"
+            />
+          </div>
 
           <div className="cards-right">
             {weatherData && weatherData.list ? (
@@ -116,6 +157,30 @@ const App = () => {
           )}
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Weather Details"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Weather Details for {selectedDate?.toDateString()}</h2>
+        {selectedDayData ? (
+          <div>
+            <p>
+              Temperature: {convertTemperature(selectedDayData.main.temp)}°{" "}
+              {unit}
+            </p>
+            <p>Humidity: {selectedDayData.main.humidity}%</p>
+            <p>Weather: {selectedDayData.weather[0].description}</p>
+            <button onClick={closeModal} className="close-modal-button">
+              Close
+            </button>
+          </div>
+        ) : (
+          <p>No data available for this date.</p>
+        )}
+      </Modal>
     </div>
   );
 };

@@ -1,4 +1,6 @@
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
+// To fetch weather data
 export const getWeatherData = async (city) => {
   try {
     const response = await fetch(
