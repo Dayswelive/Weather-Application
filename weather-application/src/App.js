@@ -9,10 +9,21 @@ const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("Pantnagar");
   const [unit, setUnit] = useState("C");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch weather data when city changes
-    getWeatherData(city).then((data) => setWeatherData(data));
+    const fetchData = async () => {
+      const data = await getWeatherData(city);
+      if (data) {
+        setWeatherData(data);
+        setError(null);
+      } else {
+        setWeatherData(null);
+        setError("Oops! This city is not present.");
+      }
+    };
+
+    fetchData();
   }, [city]);
 
   const handleSearch = (newCity) => {
@@ -27,7 +38,9 @@ const App = () => {
     <div className="weather-app">
       <div className="left-main">
         <SearchBar onSearch={handleSearch} />
-        {weatherData && weatherData.list ? (
+        {error ? (
+          <p>{error}</p>
+        ) : weatherData && weatherData.list ? (
           <WeatherDetails weatherData={weatherData} unit={unit} />
         ) : (
           <p>Loading weather details...</p>

@@ -37,12 +37,11 @@ const WeatherDetails = ({ weatherData, unit }) => {
       </div>
 
       <div className="temp-left">
-        <h2 className="cel-left">
-          <span>{unit === "C" ? tempC : ""} </span> ৹C
-        </h2>
-        <h2 className="fah-left">
-          <span>{unit === "F" ? tempF : ""} </span> ৹F
-        </h2>
+        <div className="temp-left">
+          <h2>
+            <span>{unit === "C" ? tempC : tempF}</span> ৹{unit}
+          </h2>
+        </div>
       </div>
       <div className="type-left">
         <h4>{weatherData.list[0].weather[0].description}</h4>

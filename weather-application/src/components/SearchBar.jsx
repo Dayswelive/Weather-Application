@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getCitySuggestions } from "../api/weatherApi";
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");

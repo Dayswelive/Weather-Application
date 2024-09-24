@@ -39,8 +39,7 @@ body {
 
 .tapSearch {
   font-weight: 500;
-  color: white;
-  /* background-color: #6e707a; */
+  color: black;
   padding: 10px 10px;
   cursor: pointer;
   border-radius: 10px;
