@@ -7,6 +7,7 @@ import Snow from "../assets/images/Snow.png";
 import Thunderstorm from "../assets/images/Thunderstorm.png";
 import Shower from "../assets/images/Shower.png";
 
+// Mapping weather assets
 const weatherIcons = {
   Clear,
   Clouds: HeavyCloud,
@@ -24,10 +25,11 @@ const WeatherDetails = ({ weatherData, unit }) => {
     32
   ).toFixed(2);
 
-  // Get the correct image based on the weather condition
+  // Image based on weather condition
   const weatherCondition = weatherData.list[0].weather[0].main;
   const weatherIcon = weatherIcons[weatherCondition] || Clear;
 
+  // console.log zone
   console.log(unit);
   return (
     <>

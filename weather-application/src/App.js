@@ -7,12 +7,15 @@ import { getWeatherData } from "./api/weatherApi";
 import "./stylesheets/style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
+  // state management
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("Pantnagar");
   const [unit, setUnit] = useState("C");
   const [error, setError] = useState(null);
 
+  // useeffect to fetch the weather details
   useEffect(() => {
     const fetchData = async () => {
       const data = await getWeatherData(city);
@@ -30,10 +33,12 @@ const App = () => {
     fetchData();
   }, [city]);
 
+  // handle search for city
   const handleSearch = (newCity) => {
     setCity(newCity);
   };
 
+  // Toggle between celcius and farenhite
   const toggleUnit = (unitType) => {
     setUnit(unitType);
   };

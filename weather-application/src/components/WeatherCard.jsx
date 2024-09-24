@@ -13,8 +13,8 @@ const WeatherCard = ({ dayData, unit, index }) => {
       : (((temp - 273.15) * 9) / 5 + 32).toFixed(1) + "°F";
   };
 
+  // Conditional rendering for weather images
   const getImageForWeather = (weatherType) => {
-    // Conditional rendering for weather images
     switch (weatherType) {
       case "Clouds":
       case "Mist":
@@ -33,7 +33,7 @@ const WeatherCard = ({ dayData, unit, index }) => {
         return Clear;
     }
   };
-
+  // Console Zone
   console.log(dayData);
 
   return (

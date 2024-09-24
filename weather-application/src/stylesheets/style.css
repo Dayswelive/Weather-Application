@@ -391,7 +391,6 @@ body {
 }
 
 /* Trial */
-/* Main Weather App container */
 .weather-app {
   display: flex;
   flex-wrap: wrap;
@@ -415,24 +414,6 @@ body {
   width: 75vw;
   background-color: #100e1d;
 }
-
-/* Mobile-friendly layout */
-/* @media screen and (max-width: 768px) {
-  .weather-app {
-    flex-direction: column;
-  }
-
-  .right-main,
-  .left-main {
-    width: 100%;
-    min-width: unset;
-    margin-bottom: 20px;
-  }
-
-  .head-right h6 {
-    font-size: 1.2rem;
-  }
-} */
 
 /* WeatherCard styling */
 .weather-card {
