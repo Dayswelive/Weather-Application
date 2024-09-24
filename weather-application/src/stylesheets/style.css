@@ -797,6 +797,20 @@ body {
   .submitBtn {
     width: 100px;
   }
+
+  .modal {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+  }
 }
 
 @media only screen and (max-width: 700px) {
