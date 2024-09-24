@@ -147,6 +147,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 #inputForm {
@@ -788,4 +789,37 @@ body {
 .weather-highlights p {
   font-size: 1rem;
   color: #666;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: black;
+  border: 1px solid #ccc;
+  z-index: 10;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-dropdown li:hover {
+  background-color: #f27676;
+}
+
+.popup {
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid red;
+  color: red;
+  text-align: center;
+  font-size: 1.2em;
 }
