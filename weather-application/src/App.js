@@ -5,6 +5,8 @@ import SearchBar from "./components/SearchBar";
 import WeatherHighlights from "./components/WeatherHighlights";
 import { getWeatherData } from "./api/weatherApi";
 import "./stylesheets/style.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("Pantnagar");
@@ -17,9 +19,11 @@ const App = () => {
       if (data) {
         setWeatherData(data);
         setError(null);
+        toast.success("Weather data successfully retrieved!");
       } else {
         setWeatherData(null);
         setError("Oops! This city is not present.");
+        toast.error("City not found. Please try again.");
       }
     };
 
@@ -36,6 +40,17 @@ const App = () => {
 
   return (
     <div className="weather-app">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="left-main">
         <SearchBar onSearch={handleSearch} />
         {error ? (
@@ -50,18 +65,22 @@ const App = () => {
       <div className="right-main">
         <div className="wrapper">
           <div className="head-right">
-            <h6
-              onClick={() => toggleUnit("C")}
-              className={`cel ${unit === "C" ? "active" : ""}`}
-            >
-              ৹C
-            </h6>
-            <h6
-              onClick={() => toggleUnit("F")}
-              className={`fah ${unit === "F" ? "active" : ""}`}
-            >
-              ৹F
-            </h6>
+            {!error && (
+              <>
+                <h6
+                  onClick={() => toggleUnit("C")}
+                  className={`cel ${unit === "C" ? "active" : ""}`}
+                >
+                  ৹C
+                </h6>
+                <h6
+                  onClick={() => toggleUnit("F")}
+                  className={`fah ${unit === "F" ? "active" : ""}`}
+                >
+                  ৹F
+                </h6>
+              </>
+            )}
           </div>
 
           <div className="cards-right">
