@@ -1,25 +1,86 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import WeatherCard from "./components/WeatherCard";
+import WeatherDetails from "./components/WeatherDetails";
+import SearchBar from "./components/SearchBar";
+import WeatherHighlights from "./components/WeatherHighlights";
+import { getWeatherData } from "./api/weatherApi";
+import "./stylesheets/style.css";
+const App = () => {
+  const [weatherData, setWeatherData] = useState(null);
+  const [city, setCity] = useState("Pantnagar");
+  const [unit, setUnit] = useState("C");
 
-function App() {
+  useEffect(() => {
+    // Fetch weather data when city changes
+    getWeatherData(city).then((data) => setWeatherData(data));
+  }, [city]);
+
+  const handleSearch = (newCity) => {
+    setCity(newCity);
+  };
+
+  const toggleUnit = (unitType) => {
+    setUnit(unitType);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="weather-app">
+      <div className="left-main">
+        <SearchBar onSearch={handleSearch} />
+        {weatherData && weatherData.list ? (
+          <WeatherDetails weatherData={weatherData} unit={unit} />
+        ) : (
+          <p>Loading weather details...</p>
+        )}
+      </div>
+
+      <div className="right-main">
+        <div className="wrapper">
+          <div className="head-right">
+            <h6
+              onClick={() => toggleUnit("C")}
+              className={`cel ${unit === "C" ? "active" : ""}`}
+            >
+              ৹C
+            </h6>
+            <h6
+              onClick={() => toggleUnit("F")}
+              className={`fah ${unit === "F" ? "active" : ""}`}
+            >
+              ৹F
+            </h6>
+          </div>
+
+          <div className="cards-right">
+            {weatherData && weatherData.list ? (
+              weatherData.list
+                .filter(
+                  (item, index, self) =>
+                    new Date(item.dt * 1000).getDate() !==
+                    new Date(self[index - 1]?.dt * 1000).getDate()
+                )
+                .slice(0, 5)
+                .map((day, index) => (
+                  <WeatherCard
+                    key={index}
+                    dayData={day}
+                    unit={unit}
+                    index={index}
+                  />
+                ))
+            ) : (
+              <p>Loading forecast...</p>
+            )}
+          </div>
+          {weatherData && weatherData.list ? (
+            <WeatherHighlights weatherData={weatherData.list[0]} />
+          ) : (
+            <p>Loading highlights...</p>
+          )}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
