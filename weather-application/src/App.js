@@ -120,14 +120,16 @@ const App = () => {
             )}
           </div>
           {/* Date Picker for filtering by date */}
-          <div className="date-picker-container">
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              placeholderText="Select a date"
-              className="date-picker"
-            />
-          </div>
+          {!error && (
+            <div className="date-picker-container">
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateChange}
+                placeholderText="Select a date"
+                className="date-picker"
+              />
+            </div>
+          )}
 
           <div className="cards-right">
             {weatherData && weatherData.list ? (
